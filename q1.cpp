@@ -1,0 +1,63 @@
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int val) {
+        data = val;
+        left = nullptr;
+        right = nullptr;
+    }
+};
+
+class BinaryTree {
+public:
+    Node* root;
+
+    BinaryTree() {
+        root = nullptr;
+    }
+
+    Node* createNode(int val) {
+        return new Node(val);
+    }
+    void inorder(Node* node) {
+        if (node == nullptr)
+            return;
+        inorder(node->left);
+        cout << node->data << " ";
+        inorder(node->right);
+    }
+
+    void postorder(Node* node) {
+        if (node == nullptr)
+            return;
+        postorder(node->left);
+        postorder(node->right);
+        cout << node->data << " ";
+    }
+};
+
+int main() {
+    BinaryTree tree;
+
+    tree.root = tree.createNode(1);
+    tree.root->left = tree.createNode(2);
+    tree.root->right = tree.createNode(3);
+    tree.root->left->left = tree.createNode(4);
+    tree.root->left->right = tree.createNode(5);
+    tree.root->right->right = tree.createNode(6);
+
+    cout << "Inorder Traversal: ";
+    tree.inorder(tree.root);
+
+    cout << "\nPostorder Traversal: ";
+    tree.postorder(tree.root);
+
+    cout << endl;
+    return 0;
+}
